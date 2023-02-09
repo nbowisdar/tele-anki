@@ -5,11 +5,7 @@ from pathlib import Path
 
 
 load_dotenv()
-TOKEN = os.getenv("TG_TOKEN")
-
-
-admins_id = [286365412, ]
-ngrok_url = ""
+TOKEN = os.getenv("TOKEN_BOT")
 
 
 bot = Bot(TOKEN)

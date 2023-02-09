@@ -1,6 +1,6 @@
 from aiogram import Bot
 from aiohttp import web
-from setup import bot, dp, ngrok_url
+from setup import bot, dp
 from src.database.tables import create_tables
 from src.telegram.handlers.admin_handlers import admin_router
 from src.telegram.handlers.user_handlers import user_router
@@ -32,7 +32,7 @@ async def on_shutdown(bot: Bot, base_url: str):
 
 
 def start_webhook():
-    dp["base_url"] = ngrok_url
+    # dp["base_url"] = ngrok_url
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
     dp.include_router(admin_router)
