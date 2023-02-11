@@ -18,7 +18,7 @@ class UnblockUser(StatesGroup):
 
 @admin_router.message(BlockUser.username)
 async def block(message: Message, state: FSMContext):
-    ok = block_user(message.text)
+    ok = await block_user(message.text)
     if ok:
         await message.reply("User was blocked 🦉")
     else:
@@ -28,7 +28,7 @@ async def block(message: Message, state: FSMContext):
 
 @admin_router.message(UnblockUser.username)
 async def unblock(message: Message, state: FSMContext):
-    ok = unblock_user(message.text)
+    ok = await unblock_user(message.text)
     if ok:
         await message.reply("User was unblocked 👑")
     else:

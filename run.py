@@ -1,7 +1,8 @@
 from aiogram import Bot
 from aiohttp import web
 from setup import bot, dp
-from src.database.tables import create_tables
+from src.database.models import init
+from tortoise import run_async
 from src.telegram.handlers.admin_handlers import admin_router
 from src.telegram.handlers.user_handlers import user_router
 import asyncio
@@ -12,10 +13,12 @@ from aiogram.webhook.aiohttp_server import (
 )
 
 from src.telegram.middleware.admin_only import AdminOnly
+from src.telegram.middleware.track_user import TrackUser
 
 
 async def _start():
     admin_router.message.middleware(AdminOnly())
+    user_router.message.middleware(TrackUser())
     dp.include_router(admin_router)
     dp.include_router(user_router)
     await dp.start_polling(bot)
@@ -49,7 +52,7 @@ def start_webhook():
 
 if __name__ == '__main__':
     try:
-        create_tables()
+        run_async(init())
         start_simple()   # run without webhook
         #start_webhook()  # run tg bot
     except KeyboardInterrupt:
