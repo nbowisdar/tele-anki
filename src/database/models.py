@@ -23,7 +23,3 @@ async def init():
     )
     await Tortoise.generate_schemas()
 
-
-# async def add_user(username: str):
-#     await Tournament.create(username=username)
-

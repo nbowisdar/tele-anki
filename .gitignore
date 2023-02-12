@@ -5,4 +5,4 @@ __pycache__
 test.py
 app.db-shm
 app.db
-app.db-wal
+app.db-walL
