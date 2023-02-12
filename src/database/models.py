@@ -15,6 +15,17 @@ class User(Model):
     is_admin = fields.BooleanField(default=False)
     is_blocked = fields.BooleanField(default=False)
 
+    words = fields.ReverseRelation["Word"]
+
+
+class Word(Model):
+    first = fields.TextField()
+    second = fields.TextField()
+    repetition_counter = fields.IntField(default=0)
+    is_learning = fields.BooleanField(default=True)
+
+    user = fields.ForeignKeyField("models.User", related_name='words')
+
 
 async def init():
     await Tortoise.init(

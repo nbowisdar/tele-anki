@@ -2,10 +2,7 @@ from aiogram.types import Message
 from setup import admin_router
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-
 from src.database.query.block_user import unblock_user, block_user
-
-blocked_users = []
 
 
 class BlockUser(StatesGroup):
